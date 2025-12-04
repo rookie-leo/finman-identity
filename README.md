@@ -2,7 +2,7 @@
 
 Microserviço responsavel pelo gerenciamento de conta do usuario.<br>
 
-## Endpoins
+## Endpoints
 
 O endpoint cadastro, será responsavel pela criação da conta de usuario, e captura todos os dados necessarios para a
 criação da conta.<br>
