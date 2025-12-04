@@ -34,3 +34,16 @@ para deletado, e após um periodo a ser determinado (6 meses por enquanto), os d
     * O usuario poderá deletar sua conta de forma temporaria.<br>
     * Caso o usuario queira voltar atrás com a deleção de sua conta, o mesmo poderá fazer a recuperação da conta
       deletada no periodo de 3 meses.
+
+## Tecnologias utilizadas
+| Categoria           | Ferramentas / Bibliotecas                            |
+| ------------------- | ---------------------------------------------------- |
+| Framework principal | Spring Boot 4                                        |
+| Linguagens          | Kotlin 2.2.21, Java 21                               |
+| API & Web           | spring-boot-starter-webmvc                           |
+| Persistência        | spring-boot-starter-data-jpa                         |
+| Banco de dados      | MySQL + mysql-connector-j                            |
+| Validação           | spring-boot-starter-validation                       |
+| Serialização        | jackson-module-kotlin                                |
+| Testes              | JUnit5, Spring Boot Test, Kotlin Test                |
+| Build               | Maven, spring-boot-maven-plugin, kotlin-maven-plugin |
