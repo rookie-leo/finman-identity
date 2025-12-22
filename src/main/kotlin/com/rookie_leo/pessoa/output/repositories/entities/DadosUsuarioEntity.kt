@@ -12,8 +12,7 @@ import java.util.*
 data class DadosUsuarioEntity(
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @field:Column(name = "ID_PESSOA")
+    @field:Column(name = "ID_PESSOA", columnDefinition = "BINARY(16)")
     val idPessoa: UUID? = null,
 
     @field:Column(nullable = false)
