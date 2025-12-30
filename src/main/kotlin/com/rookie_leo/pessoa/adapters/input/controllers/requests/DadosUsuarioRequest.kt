@@ -1,4 +1,4 @@
-package com.rookie_leo.pessoa.input.controllers.requests
+package com.rookie_leo.pessoa.adapters.input.controllers.requests
 
 import jakarta.validation.constraints.NotBlank
 

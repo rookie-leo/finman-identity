@@ -1,9 +1,9 @@
 package com.rookie_leo.pessoa.core.usecase
 
 import com.rookie_leo.pessoa.core.domain.DadosUsuarioDomain
-import com.rookie_leo.pessoa.output.repositories.entities.DadosUsuarioEntity
 
-interface CadastroUseCase {
+interface PessoasUseCase {
     fun cadastrar(domain: DadosUsuarioDomain): DadosUsuarioDomain
+    fun listarUsuarios(): List<DadosUsuarioDomain>?
 
 }

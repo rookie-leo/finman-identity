@@ -1,8 +1,10 @@
-package com.rookie_leo.pessoa.output.repositories.entities
+package com.rookie_leo.pessoa.adapters.input.repositories.entities
 
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonInclude
 import jakarta.persistence.*
+import org.hibernate.annotations.JdbcTypeCode
+import org.hibernate.type.SqlTypes
 import java.io.Serializable
 import java.util.*
 
@@ -12,16 +14,17 @@ import java.util.*
 data class DadosUsuarioEntity(
 
     @Id
-    @field:Column(name = "ID_PESSOA", columnDefinition = "BINARY(16)")
-    val idPessoa: UUID? = null,
+    @JdbcTypeCode(SqlTypes.BINARY)
+    @field:Column(name = "ID_PESSOA", columnDefinition = "BINARY(16)", unique = true)
+    var idPessoa: UUID = UUID.randomUUID(),
 
     @field:Column(nullable = false)
     val nome: String,
 
-    @field:Column(nullable = false)
+    @field:Column(nullable = false, unique = true)
     val email: String,
 
-    @field:Column(nullable = false)
+    @field:Column(nullable = false, unique = true)
     val documento: String,
 
     @JsonIgnore

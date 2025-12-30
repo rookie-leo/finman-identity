@@ -1,4 +1,4 @@
-package com.rookie_leo.pessoa.input.controllers.responses
+package com.rookie_leo.pessoa.adapters.input.controllers.responses
 
 data class DadosUsuarioResponse (
     val pessoaId: String,
