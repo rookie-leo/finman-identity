@@ -16,12 +16,12 @@ class GlobalExceptionHandler {
         }
 
         val response = ApiErrorResponse(
-            errorCode = HttpStatus.UNPROCESSABLE_ENTITY.value(),
+            errorCode = HttpStatus.BAD_REQUEST.value(),
             errorMessage = "Erro de validação",
             errorsDetails = errorsMap
         )
 
-        return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(response)
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response)
     }
 
 }
