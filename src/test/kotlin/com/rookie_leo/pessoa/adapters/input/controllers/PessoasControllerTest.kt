@@ -12,6 +12,7 @@ import org.springframework.http.MediaType
 import org.springframework.test.context.bean.override.mockito.MockitoBean
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import tools.jackson.databind.ObjectMapper
 import java.util.*
@@ -55,6 +56,27 @@ class PessoasControllerTest {
                 .content(objectMapper.writeValueAsString(request))
         )
             .andExpect(status().isCreated)
+    }
+
+    @Test
+    fun `deve retornar erro 400 ao conter campo invalido`() {
+        val invalidRequest = DadosUsuarioRequest(
+            nome = "",
+            email = "",
+            documento = "12345678900",
+            senha = "123456"
+        )
+
+        mockMvc.perform(
+            post("/pessoas/cadastro")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(invalidRequest))
+        )
+            .andExpect(status().isBadRequest)
+            .andExpect(jsonPath(".errorCode").value(400))
+            .andExpect(jsonPath("$.errorMessage").value("Erro de validação"))
+            .andExpect(jsonPath("$.errorsDetails.nome").value("O campo nome é obrigatório"))
+            .andExpect(jsonPath("$.errorsDetails.email").value("O campo email é obrigatório"))
     }
 
 }

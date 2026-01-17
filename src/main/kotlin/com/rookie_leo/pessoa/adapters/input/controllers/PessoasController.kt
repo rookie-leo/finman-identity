@@ -4,6 +4,7 @@ import com.rookie_leo.pessoa.adapters.input.controllers.requests.DadosUsuarioReq
 import com.rookie_leo.pessoa.adapters.input.controllers.responses.DadosUsuarioResponse
 import com.rookie_leo.pessoa.adapters.input.services.CadastroUsuarioService
 import com.rookie_leo.pessoa.adapters.input.services.ListarUsuariosService
+import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
@@ -20,7 +21,7 @@ class PessoasController(
 ) {
 
     @PostMapping("/cadastro")
-    fun cadastrar(@RequestBody dadosCadastrais: DadosUsuarioRequest): ResponseEntity<DadosUsuarioResponse> {
+    fun cadastrar(@RequestBody @Valid dadosCadastrais: DadosUsuarioRequest): ResponseEntity<DadosUsuarioResponse> {
         return ResponseEntity.status(HttpStatus.CREATED).body(cadastroService.cadastrar(dadosCadastrais))
     }
 
