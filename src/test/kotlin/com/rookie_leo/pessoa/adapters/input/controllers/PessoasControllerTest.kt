@@ -4,6 +4,7 @@ import com.rookie_leo.pessoa.adapters.input.controllers.requests.DadosUsuarioReq
 import com.rookie_leo.pessoa.adapters.input.controllers.responses.DadosUsuarioResponse
 import com.rookie_leo.pessoa.adapters.input.services.CadastroUsuarioService
 import com.rookie_leo.pessoa.adapters.input.services.ListarUsuariosService
+import com.rookie_leo.pessoa.utils.getDadosUsuarioRequest
 import org.junit.jupiter.api.Test
 import org.mockito.Mockito.`when`
 import org.springframework.beans.factory.annotation.Autowired
@@ -35,12 +36,7 @@ class PessoasControllerTest {
 
     @Test
     fun `deve cadastrar uma pessoa com sucesso`() {
-        val request = DadosUsuarioRequest(
-            nome = "Teste",
-            email = "teste@email.com",
-            documento = "12345678900",
-            senha = "123456"
-        )
+        val request = getDadosUsuarioRequest()
 
         val response = DadosUsuarioResponse(
             pessoaId = UUID.randomUUID().toString(),

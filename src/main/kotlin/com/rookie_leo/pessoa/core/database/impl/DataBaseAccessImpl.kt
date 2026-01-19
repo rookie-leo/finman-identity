@@ -14,7 +14,7 @@ class DataBaseAccessImpl(
         return try {
             pessoaRepository.save(domain.toEntity())
         } catch (ex: Exception) {
-            throw DatabaseException("Houve um erro na integração com o banco de dados", ex.cause)
+            throw DatabaseException("Houve um erro na integração com o banco de dados: ${ex.message}")
         }
     }
 
@@ -22,7 +22,7 @@ class DataBaseAccessImpl(
         return try {
             pessoaRepository.findAll()
         } catch (ex: Exception) {
-            throw DatabaseException("Houve um erro na integração com o banco de dados", ex.cause)
+            throw DatabaseException("Houve um erro na integração com o banco de dados")
         }
     }
 
