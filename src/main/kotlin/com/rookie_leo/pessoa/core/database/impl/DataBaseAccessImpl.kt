@@ -26,4 +26,8 @@ class DataBaseAccessImpl(
         }
     }
 
+    override fun findByEmail(email: String): DadosUsuarioEntity? {
+        return pessoaRepository.findByEmail(email)
+    }
+
 }
