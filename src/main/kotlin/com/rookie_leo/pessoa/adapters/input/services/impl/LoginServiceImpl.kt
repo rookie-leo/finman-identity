@@ -4,6 +4,8 @@ import com.rookie_leo.pessoa.adapters.input.controllers.requests.DadosLoginReque
 import com.rookie_leo.pessoa.adapters.input.controllers.responses.DadosUsuarioResponse
 import com.rookie_leo.pessoa.adapters.input.services.LoginService
 import com.rookie_leo.pessoa.core.usecase.LoginUseCase
+import com.rookie_leo.pessoa.utils.toDomain
+import com.rookie_leo.pessoa.utils.toResponse
 import org.springframework.stereotype.Component
 
 @Component
@@ -12,6 +14,6 @@ class LoginServiceImpl(
 ): LoginService {
 
     override fun login(dadosLogin: DadosLoginRequest): DadosUsuarioResponse? {
-        TODO("Not yet implemented")
+        return loginUseCase.login(dadosLogin.toDomain()).toResponse()
     }
 }

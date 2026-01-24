@@ -1,5 +1,6 @@
 package com.rookie_leo.pessoa.adapters.input.controllers.requests
 
+import com.rookie_leo.pessoa.core.domain.DadosLoginDomain
 import jakarta.validation.constraints.NotBlank
 
 data class DadosLoginRequest(

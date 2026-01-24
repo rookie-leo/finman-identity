@@ -3,16 +3,14 @@ package com.rookie_leo.pessoa.core.database.impl
 import com.rookie_leo.pessoa.adapters.input.repositories.PessoaRepository
 import com.rookie_leo.pessoa.adapters.input.repositories.entities.DadosUsuarioEntity
 import com.rookie_leo.pessoa.core.database.DataBaseAccess
-import com.rookie_leo.pessoa.core.domain.DadosUsuarioDomain
 import com.rookie_leo.pessoa.core.exceptions.DatabaseException
-import com.rookie_leo.pessoa.utils.toEntity
 
 class DataBaseAccessImpl(
     private val pessoaRepository: PessoaRepository
 ): DataBaseAccess {
-    override fun save(domain: DadosUsuarioDomain): DadosUsuarioEntity {
+    override fun save(entity: DadosUsuarioEntity): DadosUsuarioEntity {
         return try {
-            pessoaRepository.save(domain.toEntity())
+            pessoaRepository.save(entity)
         } catch (ex: Exception) {
             throw DatabaseException("Houve um erro na integração com o banco de dados: ${ex.message}")
         }
@@ -22,12 +20,11 @@ class DataBaseAccessImpl(
         return try {
             pessoaRepository.findAll()
         } catch (ex: Exception) {
-            throw DatabaseException("Houve um erro na integração com o banco de dados")
+            throw DatabaseException("Houve um erro na integração com o banco de dados: ${ex.message}")
         }
     }
 
-    override fun findByEmail(email: String): DadosUsuarioEntity? {
-        return pessoaRepository.findByEmail(email)
-    }
+    override fun findByEmail(email: String): DadosUsuarioEntity? =
+        pessoaRepository.findByEmail(email)
 
 }

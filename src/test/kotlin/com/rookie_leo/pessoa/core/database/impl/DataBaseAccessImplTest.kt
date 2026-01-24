@@ -38,7 +38,7 @@ class DataBaseAccessImplTest {
 
         `when`(repository.save(any<DadosUsuarioEntity>())).thenReturn(savedEntity)
 
-        val result = dataBase.save(entity.toDomain())
+        val result = dataBase.save(entity)
 
         assertNotNull(result.idPessoa)
         assertEquals(savedEntity.nome, result.nome)
@@ -61,7 +61,7 @@ class DataBaseAccessImplTest {
         `when`(repository.save(any<DadosUsuarioEntity>())).thenThrow(exception)
 
         val result = assertThrows<DatabaseException> {
-            dataBase.save(entity.toDomain())
+            dataBase.save(entity)
         }
 
         assertTrue(result.message!!.contains("Houve um erro na integração com o banco de dados"))
