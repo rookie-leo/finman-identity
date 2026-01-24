@@ -5,6 +5,7 @@ import com.rookie_leo.pessoa.core.database.DataBaseAccess
 import com.rookie_leo.pessoa.core.database.impl.DataBaseAccessImpl
 import com.rookie_leo.pessoa.core.usecase.impl.CadastrarUsuarioUseCaseImpl
 import com.rookie_leo.pessoa.core.usecase.impl.ListarUsuariosUseCaseImpl
+import com.rookie_leo.pessoa.core.usecase.impl.LoginUseCaseImpl
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
@@ -19,4 +20,7 @@ class BeanConfiguration {
 
     @Bean
     fun dataBaseAccessImpl(pessoaRepository: PessoaRepository): DataBaseAccessImpl = DataBaseAccessImpl(pessoaRepository)
+
+    @Bean
+    fun loginUseCaseImpl(dataBaseAccess: DataBaseAccess): LoginUseCaseImpl = LoginUseCaseImpl(dataBaseAccess)
 }

@@ -1,9 +1,11 @@
 package com.rookie_leo.pessoa.utils
 
+import com.rookie_leo.pessoa.adapters.input.controllers.requests.DadosLoginRequest
 import com.rookie_leo.pessoa.core.domain.DadosUsuarioDomain
 import com.rookie_leo.pessoa.adapters.input.controllers.requests.DadosUsuarioRequest
 import com.rookie_leo.pessoa.adapters.input.controllers.responses.DadosUsuarioResponse
 import com.rookie_leo.pessoa.adapters.input.repositories.entities.DadosUsuarioEntity
+import com.rookie_leo.pessoa.core.domain.DadosLoginDomain
 
 fun DadosUsuarioEntity.toDomain(): DadosUsuarioDomain =
     DadosUsuarioDomain(
@@ -19,6 +21,12 @@ fun DadosUsuarioRequest.toDomain(): DadosUsuarioDomain =
         nome = nome,
         email = email,
         documento = documento,
+        senha = senha
+    )
+
+fun DadosLoginRequest.toDomain(): DadosLoginDomain =
+    DadosLoginDomain(
+        email = email,
         senha = senha
     )
 

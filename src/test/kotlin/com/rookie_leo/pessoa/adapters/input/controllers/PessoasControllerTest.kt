@@ -4,6 +4,7 @@ import com.rookie_leo.pessoa.adapters.input.controllers.requests.DadosUsuarioReq
 import com.rookie_leo.pessoa.adapters.input.controllers.responses.DadosUsuarioResponse
 import com.rookie_leo.pessoa.adapters.input.services.CadastroUsuarioService
 import com.rookie_leo.pessoa.adapters.input.services.ListarUsuariosService
+import com.rookie_leo.pessoa.adapters.input.services.LoginService
 import com.rookie_leo.pessoa.utils.getDadosUsuarioRequest
 import org.junit.jupiter.api.Test
 import org.mockito.Mockito.`when`
@@ -30,6 +31,9 @@ class PessoasControllerTest {
 
     @MockitoBean
     private lateinit var listagemService: ListarUsuariosService
+
+    @MockitoBean
+    private lateinit var loginService: LoginService
 
     @Autowired
     private lateinit var objectMapper: ObjectMapper
