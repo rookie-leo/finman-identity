@@ -1,8 +1,7 @@
 package com.rookie_leo.pessoa.adapters.configs
 
-import com.rookie_leo.pessoa.adapters.output.database.repositories.PessoaRepository
 import com.rookie_leo.pessoa.adapters.output.database.DataBaseAccess
-import com.rookie_leo.pessoa.adapters.output.database.impl.DataBaseAccessImpl
+import com.rookie_leo.pessoa.adapters.services.SecurityService
 import com.rookie_leo.pessoa.core.usecase.impl.CadastrarUsuarioUseCaseImpl
 import com.rookie_leo.pessoa.core.usecase.impl.ListarUsuariosUseCaseImpl
 import com.rookie_leo.pessoa.core.usecase.impl.LoginUseCaseImpl
@@ -13,7 +12,8 @@ import org.springframework.context.annotation.Configuration
 class BeanConfiguration {
 
     @Bean
-    fun cadastroUseCaseImpl(dataBaseAccessImpl: DataBaseAccess): CadastrarUsuarioUseCaseImpl = CadastrarUsuarioUseCaseImpl(dataBaseAccessImpl)
+    fun cadastroUseCaseImpl(dataBaseAccessImpl: DataBaseAccess, passwordEncoder: SecurityService): CadastrarUsuarioUseCaseImpl =
+        CadastrarUsuarioUseCaseImpl(dataBaseAccessImpl, passwordEncoder)
 
     @Bean
     fun listagemUseCaseImpl(dataBaseAccessImpl: DataBaseAccess): ListarUsuariosUseCaseImpl = ListarUsuariosUseCaseImpl(dataBaseAccessImpl)

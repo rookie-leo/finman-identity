@@ -4,8 +4,8 @@ import com.rookie_leo.pessoa.adapters.output.database.DataBaseAccess
 import com.rookie_leo.pessoa.adapters.output.database.exceptions.DatabaseException
 import com.rookie_leo.pessoa.adapters.output.database.repositories.PessoaRepository
 import com.rookie_leo.pessoa.adapters.output.database.repositories.entities.DadosUsuarioEntity
-import jakarta.transaction.Transactional
 import org.springframework.stereotype.Component
+import org.springframework.transaction.annotation.Transactional
 
 @Component
 class DataBaseAccessImpl(
