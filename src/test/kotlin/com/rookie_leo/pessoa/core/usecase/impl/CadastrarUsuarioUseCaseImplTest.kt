@@ -1,6 +1,6 @@
 package com.rookie_leo.pessoa.core.usecase.impl
 
-import com.rookie_leo.pessoa.adapters.output.repositories.entities.DadosUsuarioEntity
+import com.rookie_leo.pessoa.adapters.output.database.repositories.entities.DadosUsuarioEntity
 import com.rookie_leo.pessoa.adapters.output.database.DataBaseAccess
 import com.rookie_leo.pessoa.utils.getDadosUsuarioDomain
 import com.rookie_leo.pessoa.utils.toEntity

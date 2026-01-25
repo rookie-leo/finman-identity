@@ -1,6 +1,6 @@
 package com.rookie_leo.pessoa.adapters.configs
 
-import com.rookie_leo.pessoa.adapters.output.repositories.PessoaRepository
+import com.rookie_leo.pessoa.adapters.output.database.repositories.PessoaRepository
 import com.rookie_leo.pessoa.adapters.output.database.DataBaseAccess
 import com.rookie_leo.pessoa.adapters.output.database.impl.DataBaseAccessImpl
 import com.rookie_leo.pessoa.core.usecase.impl.CadastrarUsuarioUseCaseImpl
@@ -17,9 +17,6 @@ class BeanConfiguration {
 
     @Bean
     fun listagemUseCaseImpl(dataBaseAccessImpl: DataBaseAccess): ListarUsuariosUseCaseImpl = ListarUsuariosUseCaseImpl(dataBaseAccessImpl)
-
-    @Bean
-    fun dataBaseAccessImpl(pessoaRepository: PessoaRepository): DataBaseAccessImpl = DataBaseAccessImpl(pessoaRepository)
 
     @Bean
     fun loginUseCaseImpl(dataBaseAccess: DataBaseAccess): LoginUseCaseImpl = LoginUseCaseImpl(dataBaseAccess)
