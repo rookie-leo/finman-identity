@@ -7,6 +7,7 @@ import org.springframework.http.converter.HttpMessageNotReadableException
 import org.springframework.web.bind.MethodArgumentNotValidException
 import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.ExceptionHandler
+import java.sql.SQLIntegrityConstraintViolationException
 import javax.naming.AuthenticationException
 
 @ControllerAdvice
@@ -53,6 +54,15 @@ class GlobalExceptionHandler {
                 )
             )
     }
+
+    @ExceptionHandler(SQLIntegrityConstraintViolationException::class)
+    fun handleSQLIntegrityConstraintViolationException(ex: SQLIntegrityConstraintViolationException): ResponseEntity<ApiErrorResponse> =
+        ResponseEntity.status(HttpStatus.CONFLICT).body(
+            ApiErrorResponse(
+                errorCode = HttpStatus.CONFLICT.value(),
+                errorMessage = ex.message ?: "E-mail já cadastrado na base de dados"
+            )
+        )
 
     private fun extractMissingParameter(ex: HttpMessageNotReadableException): String? {
         val cause = ex.cause
