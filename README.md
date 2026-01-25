@@ -36,14 +36,23 @@ para deletado, e após um periodo a ser determinado (6 meses por enquanto), os d
       deletada no periodo de 3 meses.
 
 ## Tecnologias utilizadas
-| Categoria           | Ferramentas / Bibliotecas                            |
-| ------------------- | ---------------------------------------------------- |
-| Framework principal | Spring Boot 4                                        |
-| Linguagens          | Kotlin 2.2.21, Java 21                               |
-| API & Web           | spring-boot-starter-webmvc                           |
-| Persistência        | spring-boot-starter-data-jpa                         |
-| Banco de dados      | MySQL + mysql-connector-j                            |
-| Validação           | spring-boot-starter-validation                       |
-| Serialização        | jackson-module-kotlin                                |
-| Testes              | JUnit5, Spring Boot Test, Kotlin Test                |
-| Build               | Maven, spring-boot-maven-plugin, kotlin-maven-plugin |
+| Categoria             | Ferramentas / Bibliotecas                                                                               |
+| --------------------- | ------------------------------------------------------------------------------------------------------- |
+| Framework principal   | Spring Boot **4.0.0**                                                                                   |
+| Linguagens            | Kotlin **2.2.21**, Java **21**                                                                          |
+| Arquitetura           | Arquitetura Hexagonal (Ports & Adapters), Clean Architecture                                            |
+| API & Web             | spring-boot-starter-webmvc                                                                              |
+| Persistência          | spring-boot-starter-data-jpa                                                                            |
+| Banco de dados        | MySQL                                                                                                   |
+| Driver JDBC           | mysql-connector-j                                                                                       |
+| Segurança             | spring-boot-starter-security                                                                            |
+| Autenticação / Tokens | JJWT (jjwt-api, jjwt-impl, jjwt-jackson)                                                                |
+| Validação             | spring-boot-starter-validation                                                                          |
+| Serialização JSON     | jackson-module-kotlin, jackson-annotations                                                              |
+| Transações            | Spring Transaction Management (via Spring Data JPA)                                                     |
+| Testes (unitários)    | JUnit 5, Kotlin Test (JUnit5)                                                                           |
+| Testes (Spring)       | spring-boot-starter-webmvc-test, spring-boot-starter-validation-test, spring-boot-starter-data-jpa-test |
+| Mocks                 | Mockito Kotlin                                                                                          |
+| Build & Gerenciamento | Maven                                                                                                   |
+| Plugins de Build      | spring-boot-maven-plugin, kotlin-maven-plugin, all-open, no-arg                                         |
+
