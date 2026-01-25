@@ -21,5 +21,17 @@ services:
 
     command: --default-authentication-plugin=mysql_native_password
 
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_HOST: mysql
+    ports:
+      - "8080:80"
+
+  adminer:
+    image: adminer
+    ports:
+      - "8082:8080"
+
 volumes:
   mysql_data:
