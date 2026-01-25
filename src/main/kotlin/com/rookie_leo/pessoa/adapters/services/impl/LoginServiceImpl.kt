@@ -1,6 +1,7 @@
 package com.rookie_leo.pessoa.adapters.services.impl
 
 import com.rookie_leo.pessoa.adapters.input.controllers.requests.DadosLoginRequest
+import com.rookie_leo.pessoa.core.domain.AccessToken
 import com.rookie_leo.pessoa.adapters.input.controllers.responses.DadosUsuarioResponse
 import com.rookie_leo.pessoa.adapters.services.LoginService
 import com.rookie_leo.pessoa.core.usecase.LoginUseCase

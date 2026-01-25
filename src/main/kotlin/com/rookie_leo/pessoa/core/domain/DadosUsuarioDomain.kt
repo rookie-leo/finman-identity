@@ -7,5 +7,5 @@ data class DadosUsuarioDomain(
     val nome: String,
     val email: String,
     val documento: String,
-    val senha: String
+    var senha: String
 )
