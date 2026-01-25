@@ -1,9 +1,9 @@
-package com.rookie_leo.pessoa.core.database.impl
+package com.rookie_leo.pessoa.adapters.output.database.impl
 
-import com.rookie_leo.pessoa.adapters.input.repositories.PessoaRepository
-import com.rookie_leo.pessoa.adapters.input.repositories.entities.DadosUsuarioEntity
-import com.rookie_leo.pessoa.core.database.DataBaseAccess
-import com.rookie_leo.pessoa.core.exceptions.DatabaseException
+import com.rookie_leo.pessoa.adapters.output.repositories.PessoaRepository
+import com.rookie_leo.pessoa.adapters.output.repositories.entities.DadosUsuarioEntity
+import com.rookie_leo.pessoa.adapters.output.database.DataBaseAccess
+import com.rookie_leo.pessoa.adapters.output.database.exceptions.DatabaseException
 
 class DataBaseAccessImpl(
     private val pessoaRepository: PessoaRepository

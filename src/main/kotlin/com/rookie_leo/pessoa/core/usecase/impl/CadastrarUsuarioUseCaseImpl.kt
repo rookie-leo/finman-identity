@@ -1,6 +1,6 @@
 package com.rookie_leo.pessoa.core.usecase.impl
 
-import com.rookie_leo.pessoa.core.database.DataBaseAccess
+import com.rookie_leo.pessoa.adapters.output.database.DataBaseAccess
 import com.rookie_leo.pessoa.core.domain.DadosUsuarioDomain
 import com.rookie_leo.pessoa.core.usecase.CadastrarUsuariosUseCase
 import com.rookie_leo.pessoa.utils.toDomain

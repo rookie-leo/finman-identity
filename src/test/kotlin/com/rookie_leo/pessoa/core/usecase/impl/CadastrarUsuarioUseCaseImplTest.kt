@@ -1,7 +1,7 @@
 package com.rookie_leo.pessoa.core.usecase.impl
 
-import com.rookie_leo.pessoa.adapters.input.repositories.entities.DadosUsuarioEntity
-import com.rookie_leo.pessoa.core.database.DataBaseAccess
+import com.rookie_leo.pessoa.adapters.output.repositories.entities.DadosUsuarioEntity
+import com.rookie_leo.pessoa.adapters.output.database.DataBaseAccess
 import com.rookie_leo.pessoa.utils.getDadosUsuarioDomain
 import com.rookie_leo.pessoa.utils.toEntity
 import org.junit.jupiter.api.Assertions.assertEquals

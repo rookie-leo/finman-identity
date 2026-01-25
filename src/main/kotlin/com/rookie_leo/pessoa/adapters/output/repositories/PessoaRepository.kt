@@ -1,6 +1,6 @@
-package com.rookie_leo.pessoa.adapters.input.repositories
+package com.rookie_leo.pessoa.adapters.output.repositories
 
-import com.rookie_leo.pessoa.adapters.input.repositories.entities.DadosUsuarioEntity
+import com.rookie_leo.pessoa.adapters.output.repositories.entities.DadosUsuarioEntity
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 import java.util.UUID

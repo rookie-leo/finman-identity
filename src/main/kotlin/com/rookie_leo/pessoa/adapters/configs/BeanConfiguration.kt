@@ -1,8 +1,8 @@
-package com.rookie_leo.pessoa.adapters.input.configs
+package com.rookie_leo.pessoa.adapters.configs
 
-import com.rookie_leo.pessoa.adapters.input.repositories.PessoaRepository
-import com.rookie_leo.pessoa.core.database.DataBaseAccess
-import com.rookie_leo.pessoa.core.database.impl.DataBaseAccessImpl
+import com.rookie_leo.pessoa.adapters.output.repositories.PessoaRepository
+import com.rookie_leo.pessoa.adapters.output.database.DataBaseAccess
+import com.rookie_leo.pessoa.adapters.output.database.impl.DataBaseAccessImpl
 import com.rookie_leo.pessoa.core.usecase.impl.CadastrarUsuarioUseCaseImpl
 import com.rookie_leo.pessoa.core.usecase.impl.ListarUsuariosUseCaseImpl
 import com.rookie_leo.pessoa.core.usecase.impl.LoginUseCaseImpl
