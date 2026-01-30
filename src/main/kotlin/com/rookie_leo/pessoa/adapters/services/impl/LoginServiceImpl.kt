@@ -14,7 +14,7 @@ class LoginServiceImpl(
     private val loginUseCase: LoginUseCase
 ): LoginService {
 
-    override fun login(dadosLogin: DadosLoginRequest): DadosUsuarioResponse? {
-        return loginUseCase.login(dadosLogin.toDomain()).toResponse()
+    override fun login(dadosLogin: DadosLoginRequest): AccessToken {
+        return loginUseCase.login(dadosLogin.toDomain())
     }
 }

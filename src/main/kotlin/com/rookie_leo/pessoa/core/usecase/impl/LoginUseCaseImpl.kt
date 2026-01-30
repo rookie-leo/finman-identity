@@ -18,8 +18,8 @@ class LoginUseCaseImpl(
             ?: throw AuthenticationException("Usuario ou senha invalido")
 
         return securityService.authenticate(
-            dadosLoginDomain,
-            userEntity
+            dadosLoginDomain.senha,
+            userEntity.toDomain()
         ) ?: throw AuthenticationException("Usuario ou senha invalido")
     }
 }

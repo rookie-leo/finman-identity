@@ -6,6 +6,7 @@ import com.rookie_leo.pessoa.adapters.input.controllers.responses.DadosUsuarioRe
 import com.rookie_leo.pessoa.adapters.services.CadastroUsuarioService
 import com.rookie_leo.pessoa.adapters.services.ListarUsuariosService
 import com.rookie_leo.pessoa.adapters.services.LoginService
+import com.rookie_leo.pessoa.core.domain.AccessToken
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -29,7 +30,7 @@ class PessoasController(
     }
 
     @PostMapping("/login")
-    fun login(@RequestBody @Valid dadosLogin: DadosLoginRequest): ResponseEntity<DadosUsuarioResponse> {
+    fun login(@RequestBody @Valid dadosLogin: DadosLoginRequest): ResponseEntity<AccessToken> {
         return ResponseEntity.status(HttpStatus.OK).body(loginService.login(dadosLogin))
     }
 

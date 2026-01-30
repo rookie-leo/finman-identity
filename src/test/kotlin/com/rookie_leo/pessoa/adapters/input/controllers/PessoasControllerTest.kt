@@ -73,7 +73,7 @@ class PessoasControllerTest {
                 .content(objectMapper.writeValueAsString(invalidRequest))
         )
             .andExpect(status().isBadRequest)
-            .andExpect(jsonPath(".errorCode").value(400))
+            .andExpect(jsonPath("$.errorCode").value(400))
             .andExpect(jsonPath("$.errorMessage").value("Erro de validação"))
             .andExpect(jsonPath("$.errorsDetails.nome").value("O campo nome é obrigatório"))
             .andExpect(jsonPath("$.errorsDetails.email").value("O campo email é obrigatório"))
