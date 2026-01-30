@@ -19,5 +19,5 @@ class BeanConfiguration {
     fun listagemUseCaseImpl(dataBaseAccessImpl: DataBaseAccess): ListarUsuariosUseCaseImpl = ListarUsuariosUseCaseImpl(dataBaseAccessImpl)
 
     @Bean
-    fun loginUseCaseImpl(dataBaseAccess: DataBaseAccess): LoginUseCaseImpl = LoginUseCaseImpl(dataBaseAccess)
+    fun loginUseCaseImpl(dataBaseAccess: DataBaseAccess, securityService: SecurityService): LoginUseCaseImpl = LoginUseCaseImpl(dataBaseAccess, securityService)
 }

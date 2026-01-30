@@ -6,6 +6,6 @@ import com.rookie_leo.pessoa.core.domain.DadosLoginDomain
 import com.rookie_leo.pessoa.core.domain.DadosUsuarioDomain
 
 interface SecurityService {
-    fun encode(dadosUsuarioDomain: DadosUsuarioDomain)
-    fun authenticate(dadosLoginDomain: DadosLoginDomain, dadosUsuarioEntity: DadosUsuarioEntity): AccessToken?
+    fun encode(rawPassword: String): String
+    fun authenticate(rawPassword: String, dadosUsuarioDomain: DadosUsuarioDomain): AccessToken?
 }

@@ -12,7 +12,8 @@ class CadastrarUsuarioUseCaseImpl(
     private val passwordEncoder: SecurityService
 ) : CadastrarUsuariosUseCase {
     override fun cadastrar(domain: DadosUsuarioDomain): DadosUsuarioDomain {
-        passwordEncoder.encode(domain)
-        return dataBaseAccess.save(domain.toEntity()).toDomain()
+        val encodedPassword = passwordEncoder.encode(domain.senha)
+        val domainWithHash = domain.copy(senha = encodedPassword)
+        return dataBaseAccess.save(domainWithHash.toEntity()).toDomain()
     }
 }
