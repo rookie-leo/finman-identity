@@ -1,4 +1,4 @@
-package com.rookie_leo.pessoa.adapters.input.repositories.entities
+package com.rookie_leo.pessoa.adapters.output.database.repositories.entities
 
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonInclude

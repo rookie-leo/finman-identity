@@ -1,7 +1,7 @@
-package com.rookie_leo.pessoa.adapters.input.services.impl
+package com.rookie_leo.pessoa.adapters.services.impl
 
 import com.rookie_leo.pessoa.adapters.input.controllers.responses.DadosUsuarioResponse
-import com.rookie_leo.pessoa.adapters.input.services.ListarUsuariosService
+import com.rookie_leo.pessoa.adapters.services.ListarUsuariosService
 import com.rookie_leo.pessoa.core.usecase.ListarUsuariosUseCase
 import com.rookie_leo.pessoa.utils.toResponse
 import org.springframework.stereotype.Component

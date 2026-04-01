@@ -22,3 +22,8 @@ spring:
     ansi:
       enabled: Always
 
+security:
+  jwt:
+    secret: KJSDHFKJSDHF9832749823749823749823KJHDF
+    expiration-minutes: 60
+

@@ -1,9 +1,8 @@
-package com.rookie_leo.pessoa.core.database.impl
+package com.rookie_leo.pessoa.adapters.output.database.impl
 
-import com.rookie_leo.pessoa.adapters.input.repositories.PessoaRepository
-import com.rookie_leo.pessoa.adapters.input.repositories.entities.DadosUsuarioEntity
-import com.rookie_leo.pessoa.core.exceptions.DatabaseException
-import com.rookie_leo.pessoa.utils.toDomain
+import com.rookie_leo.pessoa.adapters.output.database.repositories.PessoaRepository
+import com.rookie_leo.pessoa.adapters.output.database.repositories.entities.DadosUsuarioEntity
+import com.rookie_leo.pessoa.adapters.output.database.exceptions.DatabaseException
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Assertions.assertTrue

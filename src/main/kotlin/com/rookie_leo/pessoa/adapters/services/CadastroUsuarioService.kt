@@ -1,4 +1,4 @@
-package com.rookie_leo.pessoa.adapters.input.services
+package com.rookie_leo.pessoa.adapters.services
 
 import com.rookie_leo.pessoa.adapters.input.controllers.requests.DadosUsuarioRequest
 import com.rookie_leo.pessoa.adapters.input.controllers.responses.DadosUsuarioResponse

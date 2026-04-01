@@ -1,4 +1,4 @@
-package com.rookie_leo.pessoa.core.exceptions
+package com.rookie_leo.pessoa.adapters.output.database.exceptions
 
 class DatabaseException(
     override val message: String,
