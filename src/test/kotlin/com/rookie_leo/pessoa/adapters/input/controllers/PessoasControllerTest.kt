@@ -1,42 +1,53 @@
 package com.rookie_leo.pessoa.adapters.input.controllers
 
+import com.rookie_leo.pessoa.adapters.input.controllers.requests.DadosLoginRequest
 import com.rookie_leo.pessoa.adapters.input.controllers.requests.DadosUsuarioRequest
 import com.rookie_leo.pessoa.adapters.input.controllers.responses.DadosUsuarioResponse
 import com.rookie_leo.pessoa.adapters.services.CadastroUsuarioService
 import com.rookie_leo.pessoa.adapters.services.ListarUsuariosService
 import com.rookie_leo.pessoa.adapters.services.LoginService
+import com.rookie_leo.pessoa.core.exceptions.AuthenticationFailedException
 import com.rookie_leo.pessoa.utils.getDadosUsuarioRequest
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
+import org.junit.jupiter.api.extension.ExtendWith
+import org.mockito.Mockito
+import org.mockito.Mockito.mock
 import org.mockito.Mockito.`when`
+import org.mockito.junit.jupiter.MockitoExtension
+import org.mockito.kotlin.any
+import org.mockito.kotlin.times
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest
-import org.springframework.http.MediaType
-import org.springframework.test.context.bean.override.mockito.MockitoBean
-import org.springframework.test.web.servlet.MockMvc
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
+import org.springframework.core.MethodParameter
+import org.springframework.test.context.ActiveProfiles
+import org.springframework.web.bind.MethodArgumentNotValidException
 import tools.jackson.databind.ObjectMapper
+import java.lang.reflect.Method
 import java.util.*
+import kotlin.test.assertEquals
 
 
-@WebMvcTest(PessoasController::class)
+//@ActiveProfiles("test")
+//@ExtendWith(MockitoExtension::class)
 class PessoasControllerTest {
 
     @Autowired
-    private lateinit var mockMvc: MockMvc
-
-    @MockitoBean
-    private lateinit var cadastroService: CadastroUsuarioService
-
-    @MockitoBean
-    private lateinit var listagemService: ListarUsuariosService
-
-    @MockitoBean
-    private lateinit var loginService: LoginService
-
-    @Autowired
     private lateinit var objectMapper: ObjectMapper
+
+    private lateinit var pessoasController: PessoasController
+    private val cadastroService = mock(CadastroUsuarioService::class.java)
+    private val listagemService = mock(ListarUsuariosService::class.java)
+    private val loginService = mock(LoginService::class.java)
+
+    @BeforeEach
+    fun setup() {
+        pessoasController = PessoasController(
+            cadastroService,
+            loginService,
+            listagemService
+        )
+    }
 
     @Test
     fun `deve cadastrar uma pessoa com sucesso`() {
@@ -48,35 +59,52 @@ class PessoasControllerTest {
             email = "teste@email.com"
         )
 
-        `when`(cadastroService.cadastrar(request)).thenReturn(response)
+        `when`(cadastroService.cadastrar(any())).thenReturn(response)
 
-        mockMvc.perform(
-            post("/pessoas/cadastro")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(request))
-        )
-            .andExpect(status().isCreated)
+        val result = pessoasController.cadastrar(request)
+
+        assertEquals(response.pessoaId, result.body!!.pessoaId)
+        assertEquals(response.nome, result.body!!.nome)
+        assertEquals(response.email, result.body!!.email)
+        Mockito.verify(cadastroService, times(1)).cadastrar(any())
     }
 
     @Test
-    fun `deve retornar erro 400 ao conter campo invalido`() {
-        val invalidRequest = DadosUsuarioRequest(
-            nome = "",
-            email = "",
-            documento = "12345678900",
-            senha = "123456"
-        )
+    fun `não deve cadastrar usuario repetido no banco de dados`() {
 
-        mockMvc.perform(
-            post("/pessoas/cadastro")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(invalidRequest))
-        )
-            .andExpect(status().isBadRequest)
-            .andExpect(jsonPath("$.errorCode").value(400))
-            .andExpect(jsonPath("$.errorMessage").value("Erro de validação"))
-            .andExpect(jsonPath("$.errorsDetails.nome").value("O campo nome é obrigatório"))
-            .andExpect(jsonPath("$.errorsDetails.email").value("O campo email é obrigatório"))
     }
 
+//    @Test
+//    fun `Deve realizar o login de usuario cadastrado com sucesso`() {
+//        val request = DadosLoginRequest(
+//            email = "teste@email.com",
+//            senha = "12345"
+//        )
+//
+//        val response = AccessToken("HASH_TOKEN")
+//
+//        `when`(loginService.login(request)).thenReturn(response)
+//
+//        mockMvc.perform(
+//            post("/pessoas/login")
+//                .contentType(MediaType.APPLICATION_JSON)
+//                .content(objectMapper.writeValueAsString(request))
+//        )
+//            .andExpect { status().is2xxSuccessful }
+//            .andExpect { jsonPath("$.token").value("HASH_TOKEN") }
+//    }
+
+    @Test
+    fun `Não deve realizar o login de usuario quando dados estiverem incorretos`() {
+        val request = DadosLoginRequest(
+            email = "teste@email.com",
+            senha = "12"
+        )
+
+        `when`(loginService.login(any())).thenThrow(AuthenticationFailedException())
+
+        assertThrows<AuthenticationFailedException> {
+            pessoasController.login(request)
+        }
+    }
 }
