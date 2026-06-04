@@ -188,4 +188,26 @@ class PessoaRepositoryTest {
         assertEquals(dadosUsuarioEntity.documento, result.documento)
         assertEquals(dadosUsuarioEntity.senha, result.senha)
     }
+
+    @Test
+    fun testShouldFindPersonWhenFindByEmailAndDocumento() {
+        val idPessoa = UUID.fromString("b2df2c05-3adc-4c3b-9c4c-18baf264a20d")
+        val dadosUsuarioEntity = DadosUsuarioEntity(
+            idPessoa = idPessoa,
+            nome = "Nome",
+            email = "email@email.com",
+            documento = "12345678996",
+            senha = "654789"
+        )
+
+        repository.save(dadosUsuarioEntity)
+
+        val result = repository.findByEmailAndDocumento(dadosUsuarioEntity.email, dadosUsuarioEntity.documento)
+
+        assertNotNull(result)
+        assertEquals(dadosUsuarioEntity.nome, result.nome)
+        assertEquals(dadosUsuarioEntity.email, result.email)
+        assertEquals(dadosUsuarioEntity.documento, result.documento)
+        assertEquals(dadosUsuarioEntity.senha, result.senha)
+    }
 }
