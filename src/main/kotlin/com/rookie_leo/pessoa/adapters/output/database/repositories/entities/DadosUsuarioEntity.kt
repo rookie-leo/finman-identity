@@ -19,15 +19,15 @@ data class DadosUsuarioEntity(
     var idPessoa: UUID = UUID.randomUUID(),
 
     @field:Column(nullable = false)
-    val nome: String,
+    var nome: String,
 
     @field:Column(nullable = false, unique = true)
-    val email: String,
+    var email: String,
 
     @field:Column(nullable = false, unique = true)
     val documento: String,
 
     @JsonIgnore
     @field:Column(nullable = false)
-    val senha: String
+    var senha: String
 ) : Serializable
