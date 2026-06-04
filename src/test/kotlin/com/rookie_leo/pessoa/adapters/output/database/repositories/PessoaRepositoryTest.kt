@@ -106,6 +106,24 @@ class PessoaRepositoryTest {
     }
 
     @Test
+    fun testShouldRetrunTrueWhenExistsByDocumento() {
+        val dadosUsuarioEntity = DadosUsuarioEntity(
+            idPessoa = UUID.fromString("b2df2c05-3adc-4c3b-9c4c-18baf264a20d"),
+            nome = "Nome",
+            email = "email@email.com",
+            documento = "12345678996",
+            senha = "654789"
+        )
+
+        repository.save(dadosUsuarioEntity)
+
+        val result = repository.existsByDocumento(dadosUsuarioEntity.documento)
+
+        assertNotNull(result)
+        assertTrue(result)
+    }
+
+    @Test
     fun testShouldUpdatePersonWhenPersonAlreadyExists() {
         val idPessoa = UUID.fromString("b2df2c05-3adc-4c3b-9c4c-18baf264a20d")
         val dadosUsuarioEntity = DadosUsuarioEntity(
@@ -147,5 +165,27 @@ class PessoaRepositoryTest {
         val result = repository.findById(savedPerson.idPessoa)
 
         assertTrue(result.isEmpty)
+    }
+
+    @Test
+    fun testShouldFindPersonWhenFindByNomeAndEmail() {
+        val idPessoa = UUID.fromString("b2df2c05-3adc-4c3b-9c4c-18baf264a20d")
+        val dadosUsuarioEntity = DadosUsuarioEntity(
+            idPessoa = idPessoa,
+            nome = "Nome",
+            email = "email@email.com",
+            documento = "12345678996",
+            senha = "654789"
+        )
+
+        repository.save(dadosUsuarioEntity)
+
+        val result = repository.findByNomeAndEmail(dadosUsuarioEntity.nome, dadosUsuarioEntity.email)
+
+        assertNotNull(result)
+        assertEquals(dadosUsuarioEntity.nome, result.nome)
+        assertEquals(dadosUsuarioEntity.email, result.email)
+        assertEquals(dadosUsuarioEntity.documento, result.documento)
+        assertEquals(dadosUsuarioEntity.senha, result.senha)
     }
 }
