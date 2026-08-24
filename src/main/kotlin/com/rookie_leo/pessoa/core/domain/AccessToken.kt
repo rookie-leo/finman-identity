@@ -1,5 +1,7 @@
 package com.rookie_leo.pessoa.core.domain
 
 data class AccessToken(
-    val token: String
+    val value: String,
+    val type: String? = "Bearer",
+    val expiresInSeconds: Long
 )

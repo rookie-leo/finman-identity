@@ -32,14 +32,14 @@ class LoginServiceImplTest {
             email = "teste@teste.com",
             senha = "123456"
         )
-        val accessToken = AccessToken("eyJhbGciOiJIUzI1Ni...")
+        val accessToken = AccessToken(value = "eyJhbGciOiJIUzI1Ni...", expiresInSeconds = 60)
 
         `when`(loginUseCase.login(request.toDomain())).thenReturn(accessToken)
 
         val result = loginServiceImpl.login(request)
 
-        assertNotNull(result.token)
-        assertEquals(accessToken.token, result.token)
+        assertNotNull(result)
+        assertEquals(accessToken.value, result.value)
         verify(loginUseCase, times(1)).login(any())
     }
 
