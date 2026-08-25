@@ -7,7 +7,7 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/blog-pessoas
     username: blog-pessoas
-    password: mysql
+    password: ${DB_PASSWORD:mysql}
   jpa:
     hibernate:
       ddl-auto: update
@@ -24,6 +24,6 @@ spring:
 
 security:
   jwt:
-    secret: KJSDHFKJSDHF9832749823749823749823KJHDF
-    expiration-minutes: 60
+    secret: ${JWT_SECRET}
+    expiration-minutes: ${JWT_EXPIRATION_MINUTES:60}
 
