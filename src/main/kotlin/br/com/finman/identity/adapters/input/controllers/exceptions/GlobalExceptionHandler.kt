@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.exc.ValueInstantiationException
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.http.converter.HttpMessageNotReadableException
-import org.springframework.security.authentication.BadCredentialsException
+import br.com.finman.identity.domain.exceptions.AuthenticationFailedException
 import org.springframework.web.bind.MethodArgumentNotValidException
 import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.ExceptionHandler
@@ -29,21 +29,12 @@ class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response)
     }
 
-    @ExceptionHandler(AuthenticationException::class)
-    fun handleAuthenticationException(ex: AuthenticationException): ResponseEntity<ApiErrorResponse> =
+    @ExceptionHandler(AuthenticationFailedException::class)
+    fun handleAuthenticationException(ex: AuthenticationFailedException): ResponseEntity<ApiErrorResponse> =
         ResponseEntity.status(HttpStatus.FORBIDDEN).body(
             ApiErrorResponse(
                 errorCode = HttpStatus.FORBIDDEN.value(),
                 errorMessage = ex.message ?: "Usuario ou senha invalido"
-            )
-        )
-
-    @ExceptionHandler(BadCredentialsException::class)
-    fun handleBadCredentialsException(ex: BadCredentialsException): ResponseEntity<ApiErrorResponse> =
-        ResponseEntity.status(HttpStatus.FORBIDDEN).body(
-            ApiErrorResponse(
-                errorCode = HttpStatus.FORBIDDEN.value(),
-                errorMessage = ex.message!!
             )
         )
 

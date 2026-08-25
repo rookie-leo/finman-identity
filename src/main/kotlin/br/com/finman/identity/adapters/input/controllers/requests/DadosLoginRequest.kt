@@ -1,6 +1,5 @@
 package br.com.finman.identity.adapters.input.controllers.requests
 
-import br.com.finman.identity.core.domain.DadosLoginDomain
 import jakarta.validation.constraints.NotBlank
 
 data class DadosLoginRequest(
