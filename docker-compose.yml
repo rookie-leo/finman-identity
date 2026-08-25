@@ -1,22 +1,22 @@
-version: "3.9"
+name: finman-identity
 
 services:
   mysql:
     image: mysql:8.0
-    container_name: pessoas-db
+    container_name: finman-identity-db
     restart: unless-stopped
 
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: blog-pessoas
-      MYSQL_USER: blog-pessoas
+      MYSQL_DATABASE: finman_identity
+      MYSQL_USER: finman_identity
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
 
     ports:
       - "3306:3306"
 
     volumes:
-      - mysql_data:/var/lib/mysql
+      - finman_identity_mysql_data:/var/lib/mysql
       - ./db/init:/docker-entrypoint-initdb.d
 
     command: --default-authentication-plugin=mysql_native_password
@@ -34,4 +34,4 @@ services:
       - "8082:8080"
 
 volumes:
-  mysql_data:
+  finman_identity_mysql_data:

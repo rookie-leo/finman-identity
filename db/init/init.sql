@@ -1,6 +1,6 @@
-USE blog-pessoas;
+USE finman_identity;
 
-CREATE TABLE IF NOT EXISTS tb_pessoas (
+CREATE TABLE IF NOT EXISTS tb_identity_users (
     id_pessoa BINARY(16) NOT NULL UNIQUE,
     nome VARCHAR(100),
     email VARCHAR(100) UNIQUE,
@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS tb_pessoas (
     PRIMARY KEY (id_pessoa)
 );
 
-INSERT INTO tb_pessoas (id_pessoa, nome, email, documento, senha)
+INSERT INTO tb_identity_users (id_pessoa, nome, email, documento, senha)
 VALUES
     (UUID_TO_BIN(UUID()), 'Fulano', 'fulano@email.com', '41584719079', '123abc'),
     (UUID_TO_BIN(UUID()), 'Sicrano', 'sicrano@email.com', '33794861086', 'abc123'),
