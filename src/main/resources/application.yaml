@@ -3,10 +3,10 @@ server:
 
 spring:
   application:
-    name: blog-pessoa-service
+    name: finman-identity
   datasource:
-    url: jdbc:mysql://localhost:3306/blog-pessoas
-    username: blog-pessoas
+    url: jdbc:mysql://localhost:3306/finman_identity
+    username: finman_identity
     password: ${DB_PASSWORD:mysql}
   jpa:
     hibernate:

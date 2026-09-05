@@ -1,49 +1,20 @@
-# Pessoa microservice
+# FinMan Identity
 
-Microserviço responsavel pelo gerenciamento de conta do usuario.<br>
+Serviço de identidade do ecossistema FinMan. É responsável pelo cadastro de usuários, validação de credenciais e emissão de access tokens JWT.
 
-## Endpoints
+> Estado atual: projeto em evolução. A proteção completa dos endpoints, a validação de JWT no FinMan e o isolamento de demonstrativos por proprietário são entregas planejadas do MVP.
 
-O endpoint cadastro, será responsavel pela criação da conta de usuario, e captura todos os dados necessarios para a
-criação da conta.<br>
-O endpoint login, será responsavel por verificar se o usuario está cadastrado na base de dados e irá devolver como
-resposta um token jwt com dados necessarios para o usuario navegar nos endpoints de atualização e deleção de conta,
-entre outros futuros.<br>
-O endpoint atualização, será responsavel por atualizar os dados cadastrais do usuario, e só permitirá tal ação, caso o
-usuario esteja logado. Como resposta, irá retornar apenas o status 200.<br>
-O endpoint Deletar conta, será responsavel por deletar a conta do usuario, porém apenas será alterado o status da conta
-para deletado, e após um periodo a ser determinado (6 meses por enquanto), os dados serão deletados permanentemente.
+## Responsabilidades
 
-## Desenho tecnico
+- Cadastro de usuários com nome, e-mail, documento e senha.
+- Persistência de usuários em MySQL.
+- Hash de senha com BCrypt.
+- Login por e-mail e senha.
+- Emissão de access token JWT.
 
-![pessoa-ms](https://github.com/rookie-leo/img/blob/master/pessoa-ms-draw.png)
+## Arquitetura
 
-## Regras de Negócio
+O projeto utiliza Arquitetura Hexagonal (Ports & Adapters):
 
-* Cadastro<br>
-    * Toda pessoa pode se cadastrar usando seu nome, documento, email valido e senha.<br>
-    * Uma pessoa pode ter apenas um cadastro por documento.<br>
-    * O email deve ser unico na base de cadastros.
-* Login
-    * Um usuario cadastrado poderá realizar seu login usando email e senha.<br>
-* Atualização
-    * O usuario poderá atualizar seu nome. <br>
-    * O usuario poderá atualizar seu email.<br>
-    * O usuario poderá atualizar sua senha.<br>
-* Deletar conta
-    * O usuario poderá deletar sua conta de forma temporaria.<br>
-    * Caso o usuario queira voltar atrás com a deleção de sua conta, o mesmo poderá fazer a recuperação da conta
-      deletada no periodo de 3 meses.
-
-## Tecnologias utilizadas
-| Categoria           | Ferramentas / Bibliotecas                            |
-| ------------------- | ---------------------------------------------------- |
-| Framework principal | Spring Boot 4                                        |
-| Linguagens          | Kotlin 2.2.21, Java 21                               |
-| API & Web           | spring-boot-starter-webmvc                           |
-| Persistência        | spring-boot-starter-data-jpa                         |
-| Banco de dados      | MySQL + mysql-connector-j                            |
-| Validação           | spring-boot-starter-validation                       |
-| Serialização        | jackson-module-kotlin                                |
-| Testes              | JUnit5, Spring Boot Test, Kotlin Test                |
-| Build               | Maven, spring-boot-maven-plugin, kotlin-maven-plugin |
+```text
+domain → port ← application → adapters
