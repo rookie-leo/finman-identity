@@ -6,5 +6,5 @@ data class AuthenticatedIdentity(
     val id: UUID,
     val email: String,
     val nome: String,
-    val roles: Set<String> = emptySet()
+    val roles: Set<String> = setOf("USER")
 )

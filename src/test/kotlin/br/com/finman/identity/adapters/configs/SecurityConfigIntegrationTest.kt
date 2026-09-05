@@ -20,7 +20,6 @@ import kotlin.test.assertEquals
         "spring.datasource.password=",
         "spring.jpa.hibernate.ddl-auto=create-drop",
         "spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.H2Dialect",
-        "security.jwt.secret=test-secret-key-with-at-least-thirty-two-characters",
         "app.cors.allowed-origins=http://localhost:5173"
     ]
 )

@@ -1,29 +1,39 @@
 package br.com.finman.identity.adapters.output.jwt
 
+import br.com.finman.identity.adapters.configs.JwtProperties
 import br.com.finman.identity.domain.AccessToken
 import br.com.finman.identity.domain.AuthenticatedIdentity
 import br.com.finman.identity.port.output.TokenService
 import io.jsonwebtoken.Jwts
-import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
 import java.time.Instant
-import java.util.Date
+import java.util.*
 
 @Service
 class JwtService(
-    private val keyGenerator: SecretKeyGenerator,
-    @Value("\${security.jwt.expiration-minutes}") private val expirationTime: Long
+    private val rsaKeyProvider: RsaKeyProvider,
+    private val jwtProperties: JwtProperties
 ) : TokenService {
-    private val expirationTimeInSeconds = expirationTime * 60
 
-    override fun generate(identity: AuthenticatedIdentity): AccessToken =
-        AccessToken(
-            value = Jwts.builder()
-                .signWith(keyGenerator.getKey())
-                .subject(identity.id.toString())
-                .claims(mapOf("email" to identity.email, "nome" to identity.nome))
-                .expiration(Date.from(Instant.now().plusSeconds(expirationTimeInSeconds)))
-                .compact(),
-            expiresInSeconds = expirationTimeInSeconds
+    override fun generate(identity: AuthenticatedIdentity): AccessToken {
+        val now = Instant.now()
+        val expiresAt = now.plusSeconds(jwtProperties.expirationMinutes * 60)
+
+        val token = Jwts.builder()
+            .issuer(jwtProperties.issuer)
+            .audience().add(jwtProperties.audience).and()
+            .subject(identity.id.toString())
+            .claim("email", identity.email)
+            .claim("roles", identity.roles.toList())
+            .issuedAt(Date.from(now))
+            .expiration(Date.from(expiresAt))
+            .signWith(rsaKeyProvider.privateKey(), Jwts.SIG.RS256)
+            .compact()
+
+        return AccessToken(
+            value = token,
+            expiresInSeconds = jwtProperties.expirationMinutes * 60
         )
+
+    }
 }

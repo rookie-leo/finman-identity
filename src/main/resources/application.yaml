@@ -24,7 +24,10 @@ spring:
 
 security:
   jwt:
-    secret: ${JWT_SECRET}
+    private-key-path: ${JWT_PRIVATE_KEY_PATH:keys/identity-private.pem}
+    public-key-path: ${JWT_PUBLIC_KEY_PATH:keys/identity-public.pem}
+    issuer: ${JWT_ISSUER:finman-identity}
+    audience: ${JWT_AUDIENCE:finman-api}
     expiration-minutes: ${JWT_EXPIRATION_MINUTES:60}
 
 app:
