@@ -31,10 +31,10 @@ class GlobalExceptionHandler {
 
     @ExceptionHandler(AuthenticationFailedException::class)
     fun handleAuthenticationException(ex: AuthenticationFailedException): ResponseEntity<ApiErrorResponse> =
-        ResponseEntity.status(HttpStatus.FORBIDDEN).body(
+        ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(
             ApiErrorResponse(
-                errorCode = HttpStatus.FORBIDDEN.value(),
-                errorMessage = ex.message ?: "Usuario ou senha invalido"
+                errorCode = HttpStatus.UNAUTHORIZED.value(),
+                errorMessage = ex.message ?: "Credenciais inválidas"
             )
         )
 

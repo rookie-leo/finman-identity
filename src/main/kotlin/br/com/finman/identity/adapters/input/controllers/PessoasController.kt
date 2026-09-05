@@ -29,11 +29,6 @@ class PessoasController(
         return ResponseEntity.status(HttpStatus.CREATED).body(cadastrarUsuariosUseCase.cadastrar(dadosCadastrais.toDomain()).toResponse())
     }
 
-    @PostMapping("/login")
-    fun login(@RequestBody @Valid dadosLogin: DadosLoginRequest): ResponseEntity<AccessToken> {
-        return ResponseEntity.status(HttpStatus.OK).body(loginUseCase.login(dadosLogin.toDomain()))
-    }
-
     @GetMapping()
     fun listarUsuarios(): ResponseEntity<List<DadosUsuarioResponse>> {
         return ResponseEntity.status(HttpStatus.OK).body(listarUsuariosUseCase.listarUsuarios().map { it.toResponse() })
