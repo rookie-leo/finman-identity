@@ -49,6 +49,7 @@ class SecurityConfig(
                 it.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 
                 it.requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
+                it.requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
                 it.requestMatchers(HttpMethod.GET, "/actuator/health").permitAll()
 
                 it.requestMatchers(HttpMethod.GET, "/auth/me").authenticated()

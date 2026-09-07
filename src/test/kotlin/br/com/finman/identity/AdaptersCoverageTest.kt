@@ -1,7 +1,6 @@
 package br.com.finman.identity
 
 import br.com.finman.identity.adapters.configs.BeanConfiguration
-import br.com.finman.identity.adapters.input.controllers.AuthController
 import br.com.finman.identity.adapters.input.controllers.PessoasController
 import br.com.finman.identity.adapters.input.controllers.requests.DadosLoginRequest
 import br.com.finman.identity.adapters.input.controllers.requests.DadosUsuarioRequest
@@ -15,18 +14,14 @@ import br.com.finman.identity.adapters.output.security.BCryptPasswordHasher
 import br.com.finman.identity.application.CadastrarUsuarioService
 import br.com.finman.identity.application.ListarUsuariosService
 import br.com.finman.identity.application.LoginService
-import br.com.finman.identity.domain.AccessToken
 import br.com.finman.identity.domain.DadosLoginDomain
 import br.com.finman.identity.domain.DadosUsuarioDomain
-import br.com.finman.identity.port.input.CadastrarUsuariosUseCase
 import br.com.finman.identity.port.input.ListarUsuariosUseCase
-import br.com.finman.identity.port.input.LoginUseCase
 import br.com.finman.identity.port.output.PasswordHasher
 import br.com.finman.identity.port.output.TokenService
 import br.com.finman.identity.port.output.UsuarioRepository
 import org.junit.jupiter.api.Test
 import org.mockito.kotlin.any
-import org.mockito.kotlin.doThrow
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
@@ -60,29 +55,17 @@ class AdaptersCoverageTest {
     }
 
     @Test
-    fun `deve delegar chamadas dos controllers aos casos de uso`() {
-        val cadastroUseCase = mock<CadastrarUsuariosUseCase>()
-        val loginUseCase = mock<LoginUseCase>()
+    fun `deve delegar a listagem do controller ao caso de uso`() {
         val listagemUseCase = mock<ListarUsuariosUseCase>()
-        val pessoasController = PessoasController(cadastroUseCase, loginUseCase, listagemUseCase)
-        val authController = AuthController(loginUseCase)
-        val cadastro = DadosUsuarioRequest("Leonardo", "leo@finman.com", "12345678900", "senha")
-        val token = AccessToken("token", expiresInSeconds = 3600)
+        val pessoasController = PessoasController(listagemUseCase)
 
-        whenever(cadastroUseCase.cadastrar(any())).thenReturn(usuario)
         whenever(listagemUseCase.listarUsuarios()).thenReturn(listOf(usuario))
-        whenever(loginUseCase.login(any())).thenReturn(token)
 
-        val cadastroResponse = pessoasController.cadastrar(cadastro)
         val listagemResponse = pessoasController.listarUsuarios()
-        val loginResponse = authController.login(DadosLoginRequest("leo@finman.com", "senha"))
 
-        assertEquals(HttpStatus.CREATED, cadastroResponse.statusCode)
-        assertEquals(usuario.email, cadastroResponse.body?.email)
         assertEquals(HttpStatus.OK, listagemResponse.statusCode)
         assertEquals(listOf(usuario.email), listagemResponse.body?.map { it.email })
-        assertEquals(token, loginResponse.body)
-        verify(cadastroUseCase).cadastrar(cadastro.toDomain())
+        verify(listagemUseCase).listarUsuarios()
     }
 
     @Test

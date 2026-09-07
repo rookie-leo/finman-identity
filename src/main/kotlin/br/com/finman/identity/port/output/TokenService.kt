@@ -5,4 +5,5 @@ import br.com.finman.identity.domain.AuthenticatedIdentity
 
 interface TokenService {
     fun generate(identity: AuthenticatedIdentity): AccessToken
+    fun validate(token: String): AuthenticatedIdentity
 }
